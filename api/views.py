@@ -27,14 +27,17 @@ def triajes():
         db.session.commit()
     
     triaje = triajeSchema.load(json_data, unknown=EXCLUDE)
-    triaje.imc = int(int(triaje.peso) / (int(triaje.talla)**2))
+    triaje.imc = int(triaje.peso) / ((int(triaje.talla)/100)**2)
     triaje.calificacion_imc = calcular_calificacion_imc(triaje.imc)
     triaje.usuario_id = usuario.id
     triaje.fecha = datetime.now().isoformat()
     db.session.add(triaje)
     db.session.commit()
     
-    return Response(status=201)
+    return jsonify({
+        "status": 201,
+        "mesg": "registrado correctamente"
+    })
 
 
 @api.get("triajes")

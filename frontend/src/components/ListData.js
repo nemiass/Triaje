@@ -4,21 +4,11 @@ import { getTriajes} from '../services/triajesService';
 
 export default function ListData() {
 
-    const triajes = useContext(DataContext);
-
-    const [datos, setDatos] = useState([]);
-
-    useEffect(() => {
-      async function showTriajes() {
-        const d = await getTriajes();
-        setDatos(d)
-      }
-      showTriajes()
-    }, [datos])
+    const {triajes} = useContext(DataContext);
 
     return (
         <div>
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Nombres</th>
@@ -37,8 +27,8 @@ export default function ListData() {
 
                 <tbody>
                     {
-                        datos.map((triaje, index) => {
-                            return (<tr key={triaje.id}>
+                        triajes.map((triaje, index) => {
+                            return (<tr key={index}>
                                 <td>{triaje.usuario.nombres} {triaje.usuario.apellidos}</td>
                                 <td>{triaje.usuario.dni}</td>
                                 <td>{triaje.temperatura}</td>

@@ -5,7 +5,7 @@ export const postTriaje = async (object) => {
     const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      // 'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(object)
@@ -19,7 +19,5 @@ export const getTriajes = async () => {
   const url = `${API_URL}/triajes`;
   const res = await fetch(url)
   const jsonData = await res.json()
-  console.log(jsonData);
   return jsonData
 }
-
